@@ -33,13 +33,15 @@ jobs:
           working_directory: .
           command: validate
 
-      - name: Validate
+      - name: echo secrets
         run: |
           echo "AWS_ACCESS_KEY_ID = ${{ secrets.AWS_ACCESS_KEY_ID }}"
           echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.SSH_USERNAME }}"
 
       - name: Build
         uses: hashicorp/packer-github-actions@master
         with:
           working_directory: .
+          target: jenkins-ami.pkr.hcl
           command: build

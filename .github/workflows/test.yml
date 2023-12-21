@@ -18,6 +18,12 @@ jobs:
       - name: Packer Format Check
         run: packer fmt -check . # Check if the packer files are properly formatted
 
+      - name: echo secrets
+        run: |
+          echo "AWS_ACCESS_KEY_ID = ${{ secrets.AWS_ACCESS_KEY_ID }}"
+          echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.SSH_USERNAME }}"
+
       - name: Packer Validate
         env:
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
