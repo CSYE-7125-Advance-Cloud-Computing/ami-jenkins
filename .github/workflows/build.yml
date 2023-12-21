@@ -15,11 +15,13 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-      DEFAULT_SUBNET_ID: ${{ secrets.DEFAULT_SUBNET_ID }}
 
     steps:
       - name: Checkout Git Repository
         uses: actions/checkout@v2
+
+      - name: Initialize Packer
+        run: packer init jenkins-ami.pkr.hcl
 
       - name: Packer build
         uses: hashicorp/packer-github-actions@master
