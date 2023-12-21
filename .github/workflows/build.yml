@@ -1,0 +1,29 @@
+name: Build Jenkins AMI
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  merge:
+    if: github.event.pull_request.merged
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+      DEFAULT_SUBNET_ID: ${{ secrets.DEFAULT_SUBNET_ID }}
+
+    steps:
+      - name: Checkout Git Repository
+        uses: actions/checkout@v2
+
+      - name: Packer build
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          target: jenkins-ami.pkr.hcl
+          working_directory: .
