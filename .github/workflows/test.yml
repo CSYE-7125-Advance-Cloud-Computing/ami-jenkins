@@ -1,0 +1,33 @@
+name: Packer Validate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  packer_validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Packer Init
+        run: packer init . # Initialize packer in the current directory
+
+      - name: Packer Format Check
+        run: packer fmt -check . # Check if the packer files are properly formatted
+
+      - name: Packer Validate
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_PROFILE: ${{ secrets.AWS_PROFILE }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+        run: |
+          packer validate \
+            -var "aws_account_id=${AWS_ACCOUNT_ID}" \
+            -var "region=${AWS_REGION}" \
+            -var "profile=${AWS_PROFILE}" \
+            -var "ssh_username=${SSH_USERNAME}" \
+            .
