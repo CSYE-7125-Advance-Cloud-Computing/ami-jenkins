@@ -6,12 +6,6 @@ on:
     branches:
       - main
 
-env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-  SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-
 jobs:
   merge:
     if: github.event.pull_request.merged
@@ -37,10 +31,14 @@ jobs:
         run: |
           echo "AWS_ACCESS_KEY_ID = ${{ secrets.AWS_ACCESS_KEY_ID }}"
           echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-          echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.SSH_USERNAME }}"
 
       - name: Build
         uses: hashicorp/packer-github-actions@master
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
         with:
           working_directory: .
           target: jenkins-ami.pkr.hcl
