@@ -1,4 +1,4 @@
-# aws-jenkins
+# ami-jenkins
 
 ## CSYE7125: Advanced Cloud Computing
 
@@ -19,11 +19,12 @@ packer init jenkins-ami.pkr.hcl
 packer fmt jenkins-ami.pkr.hcl
 
 // validate the hcl file
-packer validate aws_ami.pkr.hcl
+packer validate jenkins-ami.pkr.hcl
 
 // run the packer to create AMI
 packer build jenkins-ami.pkr.hcl
 
-```
+// flags
+--var-file=variables.pkrvars.hcl
 
-<!-- test -->
+```

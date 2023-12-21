@@ -19,15 +19,5 @@ jobs:
         run: packer fmt -check .
 
       - name: Packer Validate
-        env:
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_PROFILE: ${{ secrets.AWS_PROFILE }}
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
         run: |
-          packer validate \
-            -var "aws_account_id=${AWS_ACCOUNT_ID}" \
-            -var "region=${AWS_REGION}" \
-            -var "profile=${AWS_PROFILE}" \
-            -var "ssh_username=${SSH_USERNAME}" \
-            .
+          packer validate .
