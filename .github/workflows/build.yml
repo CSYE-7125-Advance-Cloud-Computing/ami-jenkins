@@ -23,6 +23,9 @@ jobs:
       - name: Initialize Packer
         run: packer init jenkins-ami.pkr.hcl
 
+      - name: Validate Packer template
+        run: packer validate jenkins-ami.pkr.hcl
+
       - name: Packer build
         uses: hashicorp/packer-github-actions@master
         with:
