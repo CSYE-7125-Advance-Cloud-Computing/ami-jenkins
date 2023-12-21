@@ -20,15 +20,20 @@ jobs:
       - name: Checkout Git Repository
         uses: actions/checkout@v2
 
-      - name: Initialize Packer
-        run: packer init jenkins-ami.pkr.hcl
-
-      - name: Validate Packer template
-        run: packer validate jenkins-ami.pkr.hcl
-
-      - name: Packer build
+      - name: Init
         uses: hashicorp/packer-github-actions@master
         with:
-          command: build
-          target: jenkins-ami.pkr.hcl
           working_directory: .
+          command: init
+
+      - name: Validate
+        uses: hashicorp/packer-github-actions@master
+        with:
+          working_directory: .
+          command: validate
+
+      - name: Build
+        uses: hashicorp/packer-github-actions@master
+        with:
+          working_directory: .
+          command: build
