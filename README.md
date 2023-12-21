@@ -25,5 +25,3 @@ packer validate aws_ami.pkr.hcl
 packer build jenkins-ami.pkr.hcl
 
 ```
-
-<!-- testing new -->
