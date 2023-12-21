@@ -1,5 +1,4 @@
 # # Ignore local Packer variable files
-# *.pkrvars.hcl
 
 # Ignore Packer build artifacts
 packer_cache/
