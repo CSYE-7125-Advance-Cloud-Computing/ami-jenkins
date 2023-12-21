@@ -16,7 +16,7 @@ jobs:
         run: packer init .
 
       - name: Packer Format Check
-        run: packer fmt -check . # Check if the packer files are properly formatted
+        run: packer fmt -check .
 
       - name: Packer Validate
         env:
