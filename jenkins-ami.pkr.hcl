@@ -42,7 +42,7 @@ source "amazon-ebs" "ubuntu" {
     owners      = ["099720109477"] // Canonical's owner ID
     most_recent = true
   }
-  ssh_username = var.ssh_username
+  ssh_username = "ubuntu"
   ami_users    = [var.aws_account_id]
   profile      = var.profile
 }
