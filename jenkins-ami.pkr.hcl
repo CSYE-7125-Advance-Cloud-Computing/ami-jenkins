@@ -5,18 +5,18 @@ variable "aws_account_id" {
 }
 
 variable "region" {
-  type = string
-  // default = "us-east-1"
+  type    = string
+  default = "us-east-1"
 }
 
 variable "profile" {
-  type = string
-  // default = "ghactions"
+  type    = string
+  default = "ghactions"
 }
 
 variable "ssh_username" {
-  type = string
-  // default = "ubuntu"
+  type    = string
+  default = "ubuntu"
 }
 
 packer {
