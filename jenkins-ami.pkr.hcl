@@ -63,19 +63,4 @@ build {
       "/tmp/script.sh"
     ]
   }
-
-  // Nginx configuration for Jenkins
-  provisioner "file" {
-    source      = "nginx.conf"
-    destination = "/tmp/nginx.conf"
-  }
-
-  provisioner "shell" {
-    inline = [
-      "sudo mv /tmp/nginx.conf /etc/nginx/sites-available/jenkins",
-      "sudo ln -s /etc/nginx/sites-available/jenkins /etc/nginx/sites-enabled/",
-      "sudo rm /etc/nginx/sites-enabled/default",
-      "sudo systemctl restart nginx"
-    ]
-  }
 }
