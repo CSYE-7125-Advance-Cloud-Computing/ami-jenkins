@@ -12,7 +12,7 @@
 ## Instruction to run the project
 
 ```
-// initialize packer
+// initialize packer ...
 packer init jenkins-ami.pkr.hcl
 
 // format the packer file
