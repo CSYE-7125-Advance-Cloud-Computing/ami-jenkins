@@ -49,6 +49,7 @@ export NVM_DIR="$HOME/.nvm"
 
 nvm install node # "node" is an alias for the latest version
 nvm install-latest-npm
+
 echo ******************* Setup Nginx *******************
 sudo apt-get install -y nginx
 
