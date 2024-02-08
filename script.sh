@@ -38,10 +38,7 @@ sudo apt-get update
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-sudo groupadd docker
 sudo usermod -a -G docker jenkins
-
-newgrp docker
 
 echo ******************* Install node *******************
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -51,7 +48,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 nvm install node # "node" is an alias for the latest version
-
+nvm install-latest-npm
 echo ******************* Setup Nginx *******************
 sudo apt-get install -y nginx
 
