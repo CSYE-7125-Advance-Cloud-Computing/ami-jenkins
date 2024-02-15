@@ -1,4 +1,12 @@
-// Define variables
+packer {
+  required_plugins {
+    amazon = {
+      source  = "github.com/hashicorp/amazon"
+      version = "~> 1"
+    }
+  }
+}
+
 variable "aws_account_id" {
   type    = string
   default = "458266182191"
@@ -19,14 +27,7 @@ variable "ssh_username" {
   default = "ubuntu"
 }
 
-packer {
-  required_plugins {
-    amazon = {
-      source  = "github.com/hashicorp/amazon"
-      version = "~> 1"
-    }
-  }
-}
+
 
 // Define Source
 source "amazon-ebs" "ubuntu" {
@@ -39,7 +40,7 @@ source "amazon-ebs" "ubuntu" {
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
-    owners      = ["099720109477"] // Canonical's owner ID
+    owners      = ["099720109477"]
     most_recent = true
   }
   ssh_username = "ubuntu"
@@ -57,10 +58,16 @@ build {
     destination = "/tmp/script.sh"
   }
 
+  provisioner "file" {
+    source      = "jenkins_plugins.txt"
+    destination = "jenkins_plugins.txt"
+  }
+
   provisioner "shell" {
     inline = [
       "chmod +x /tmp/script.sh",
       "/tmp/script.sh"
     ]
   }
+
 }
