@@ -33,3 +33,4 @@ credentials
 secret.tfvars
 
 # Ignore any other files specific to your environment or workflow
+variables.pkvars.hcl
