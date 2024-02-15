@@ -73,19 +73,23 @@ sudo systemctl enable docker
 sudo systemctl start docker
 
 echo ******************* Install node *******************
-curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
-sudo bash /tmp/nodesource_setup.sh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.bashrc
 
-sudo apt install nodejs -y
-sudo node -v
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+nvm install --lts
+node -v npm -v
 
 sudo apt-get update
 
-sudo npm install -g semantic-release
-sudo npm install -g @semantic-release/git
-sudo npm install -g @semantic-release/exec
-sudo npm install -g conventional-changelog-conventionalcommits
-sudo npm install -g npm-cli-login
+npm install -g semantic-release
+npm install -g @semantic-release/git
+npm install -g @semantic-release/exec
+npm install -g conventional-changelog-conventionalcommits
+npm install -g npm-cli-login
 
 echo ******************* Setup Nginx *******************
 sudo apt-get install -y nginx
